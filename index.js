@@ -1,3 +1,11 @@
+/*
+https://expressjs.com/en/resources/middleware.html
+https://expressjs.com/en/guide/writing-middleware.html
+https://expressjs.com/en/4x/api.html#res.attachment
+
+*/
+
+
 import express from 'express'
 import { isUser } from './utils/middleware.js';
 const app=express()
@@ -12,7 +20,6 @@ The next function is a function in the Express router which, when invoked, execu
 // middleware incorporado o de intergación
 app.use(express.json())
 // si yo le mando un dato de tipo json, mi backend o en este caso mi api lo pueda tarabajr
-
 
 
 app.use(express.urlencoded({extended:true}))
