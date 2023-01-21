@@ -7,7 +7,17 @@
     <title>webSocket</title>
 </head>
 <body>
-    
+    <form id="form">
+        <input type="text" id="user" />
+        <input type="text" id="message"/>
+        <button type="submit">Send</button>
+    </form>
+
+    <div>
+        <dl id="chat">
+            
+        </dl>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="index.js"></script>
 </body>

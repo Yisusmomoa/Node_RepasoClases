@@ -23,12 +23,21 @@ const httpServer=createServer(app)
 // creamos una nueva instancia para poder conectar al servidor nativo
 // en este servidor se van a conectar los sockets
 const io=new Server(httpServer)
-
+let messages=[
+    {
+        user:"os",
+        message:"Hola equipo"
+    },
+    {
+        user:"Kuka",
+        message:"Hola equipo"
+    }
+]
 
 app.use(express.static("public"))
 
 app.get("/", (req, res)=>{
-    res.sendFile(`${__dirname}/index.html`)
+    res.sendFile(`/index.html`)
 })
 
 
@@ -38,18 +47,16 @@ app.get("/", (req, res)=>{
 io.on("connection", (socket)=>{
     console.log("Hola", socket.id)
 
-    // mandar un mensaje dessde el server al cliente
-    // primer paramtero es un paquqte que se debe de llamar gual en el cliente
-    socket.emit("saludo", {
-        id:2,
-        "name":"producto1",
-        "category":"videojuegos",
-        "saludo":"hola, soy el servidor"
+    // primero mostrar los mensaje desde el server
+    socket.emit("messages", messages)
+    
+    socket.on("newMessage", (data)=>{
+        messages.push(data)
+        io.sockets.emit("messages", messages)
     })
-    socket.on("respuesta", (data)=>{
-        console.log(data)
-    })
+
 })
+
 httpServer.listen(3000, ()=>{
     console.log("Server ok")
 })
