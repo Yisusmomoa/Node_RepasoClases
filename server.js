@@ -44,7 +44,11 @@ let messages=[
 }
 */
 let users=[
-    
+    {
+        email:"correospamtuptm@gmail.com",
+        password:"123",
+        "username":"makav6"
+    }
 ]
 
 /*
@@ -62,7 +66,13 @@ let users=[
 
 */
 let rooms=[
+    {
+        id:1,
+        "messages":[
 
+        ],
+        "nameRoom":"room1"
+    }
 ]
 
 app.use(express.static("public"))
@@ -85,11 +95,20 @@ app.get('/login', (req, res)=>{
     res.sendFile(`${__dirname}/public/login.html`)
 })
 
+app.get('/home/rooms', (req, res)=>{
+    res.status(200).send(rooms)
+})
+app.get('/home', (req, res)=>{
+    res.sendFile(`${__dirname}/public/home.html`)
+})
+
+
+
 app.post("/register", (req, res)=>{
     const {email, username, password}=req.body
     const isUserExist=users.some(user=>user.username===username)
     if (isUserExist) {
-        res.status(404).send({
+        return res.status(404).send({
             "error":"username is already exists"
         })
     } else {
@@ -100,10 +119,25 @@ app.post("/register", (req, res)=>{
         }
         users.push(user)
         console.log(users)
-        res.status(201).send({
+        return res.status(201).send({
             "success":"user was succesufly register"
         })
     }
+})
+
+app.post("/login", (req, res)=>{
+    const {email, password}=req.body;
+    console.log(users)
+    const user=users.find(element=>{
+        return element.email===email && element.password===password
+    })
+    if (user!=undefined) {
+        console.log(user)
+        return res.status(200).send(user)
+    }
+    return res.status(404).send({
+        error:"Email o password incorrect"
+    })
 })
 
 // loin lo guardo en el sessionStorage

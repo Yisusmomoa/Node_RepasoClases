@@ -42,3 +42,12 @@ form.onsubmit=(ev)=>{
 }
 
 
+/*
+     La función toma dos argumentos: el primer 
+     argumento es el nombre del evento, que se utiliza para 
+     identificar el tipo de mensaje que se está enviando, y el segundo argumento 
+     es el cuerpo del mensaje, que puede ser cualquier tipo de datos. 
+    
+    */
+
+    // socket.emit("register", user)
