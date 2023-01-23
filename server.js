@@ -69,7 +69,7 @@ let rooms=[
     {
         id:1,
         "messages":[
-
+            
         ],
         "nameRoom":"room1"
     },
@@ -105,14 +105,14 @@ app.get('/login', (req, res)=>{
 app.get('/home/rooms', (req, res)=>{
     res.status(200).send(rooms)
 })
+
 app.get('/home', (req, res)=>{
     res.sendFile(`${__dirname}/public/home.html`)
 })
 
 app.get('/rooms/:id', (req, res)=>{
-    res.sendFile(`${__dirname}/public/room.html`).send({
-        idRoom:req.params.id
-    })
+    res.sendFile(`${__dirname}/public/room.html`)
+
 })
 
 

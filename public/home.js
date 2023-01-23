@@ -11,7 +11,7 @@ const showRooms=(data=[])=>{
     const groups=data.map(element=>{
         return `
         <li>
-            <a href='room/${element.id}'>
+            <a href='rooms/${element.id}'>
                 ${element.nameRoom}
             </a>    
         </li>
