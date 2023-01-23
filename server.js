@@ -72,6 +72,13 @@ let rooms=[
 
         ],
         "nameRoom":"room1"
+    },
+    {
+        id:2,
+        "messages":[
+
+        ],
+        "nameRoom":"room2"
     }
 ]
 
@@ -102,6 +109,11 @@ app.get('/home', (req, res)=>{
     res.sendFile(`${__dirname}/public/home.html`)
 })
 
+app.get('/rooms/:id', (req, res)=>{
+    res.sendFile(`${__dirname}/public/room.html`).send({
+        idRoom:req.params.id
+    })
+})
 
 
 app.post("/register", (req, res)=>{
@@ -146,6 +158,9 @@ app.post("/login", (req, res)=>{
 // y se ejecuta cuando un cliente se conecta
 // la variable socket hace referencia al archivo index.js de la carpeta public, indica que alguien se conecto
 io.on("connection", (socket)=>{
+    // se generan diferentes sockets id cada evz que creo un grupo
+    // Por qué?
+    
     console.log("Hola", socket.id)
 
     // primero mostrar los mensaje desde el server
@@ -154,6 +169,13 @@ io.on("connection", (socket)=>{
     socket.on("newMessage", (data)=>{
         messages.push(data)
         io.sockets.emit("messages", messages)
+    })
+
+    socket.on("createRoom", (data)=>{
+        data.id=rooms.length+1
+        data.messages=[]
+        rooms.push(data)
+        io.sockets.emit("rooms", rooms)
     })
 
 })
