@@ -1,14 +1,15 @@
 import { io } from "socket.io-client";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import ChatProvider from "./context/ChatProvider";
 
 function App() {
 
   return (
-    <div>
+    <ChatProvider>
       <Header/>
       <Main/>
-    </div>
+    </ChatProvider>
   )
 }
 
