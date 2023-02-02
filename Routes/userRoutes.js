@@ -1,23 +1,22 @@
-import express from 'express';
-import { 
-    getAllUsers,
-    getOneUser,
-    createUser,
-    updateUser,
-    deleteUser
- } from "../controllers/userController.js";
+import express from "express"
 
-const userRoutes=express.Router()
+const userRoutes = express.Router()
 
-// hacemos nuestras peticiones http
-userRoutes.get('/', getAllUsers)
+userRoutes.get("/", (req, res) => {
+    res.send("getAllAuser")
+})
+userRoutes.get("/:id", (req, res) => {
+    res.send({ getUserById: req.params.id })
+})
 
-userRoutes.get('/:id', getOneUser)
-
-userRoutes.post('/', createUser)
-
-userRoutes.put('/:id', updateUser)
-
-userRoutes.delete('/:id', deleteUser)
+userRoutes.post("/",(req, res) => {
+    res.send({ createUser: req.body })
+})
+userRoutes.put("/", (req, res) => {
+    res.send("updateUser")
+})
+userRoutes.delete("/", (req, res) => {
+    res.send("deleteUser")
+})
 
 export default userRoutes
