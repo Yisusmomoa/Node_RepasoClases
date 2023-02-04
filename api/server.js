@@ -7,7 +7,7 @@ dotenv.config()
 
 // import Category from './models/Category.js'
 // import Product from './models/Product.js'
-import {Category, Product} from './models/index.js'
+// import {Category, Product} from './models/index.js'
 const app=express()
 
 // Process es un objeto global que nos da acceso
